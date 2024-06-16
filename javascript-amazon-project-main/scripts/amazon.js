@@ -76,6 +76,12 @@ let matchingproduct;
    })
   } 
    console.log(cart)
+   let cartcontents=0
+   cart.forEach((item)=>{
+    cartcontents+=item.Quantity
+   })
+   document.querySelector('.js-cart-quantity').innerText=cartcontents
   })
 
+ 
 })
