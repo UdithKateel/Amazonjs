@@ -1,16 +1,17 @@
-import { cart } from "../data/cart.js";
+import { cart,removeFromCart } from "../data/cart.js";
 import { products } from "../data/products.js";
-let cartsummary=' '
-cart.forEach((cartitem)=>{
-    const productID=cartitem.productId;
+
+let cartsummary = '';
+cart.forEach((cartitem) => {
+    const productID = cartitem.productId;
     let matchingProduct;
-    products.forEach((product)=>{
-        if(product.id===productID){
-            matchingProduct=product
+    products.forEach((product) => {
+        if (product.id === productID) {
+            matchingProduct = product;
         }
-    })
-    cartsummary+=`
-      <div class="cart-item-container">
+    });
+    cartsummary += `
+      <div class="cart-item-container js-item-container-${matchingProduct.id}">
             <div class="delivery-date">
               Delivery date: Tuesday, June 21
             </div>
@@ -24,7 +25,7 @@ cart.forEach((cartitem)=>{
                   ${matchingProduct.name}
                 </div>
                 <div class="product-price">
-                  $${(matchingProduct.priceCents/100).toFixed(2)}
+                  $${(matchingProduct.priceCents / 100).toFixed(2)}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -33,7 +34,7 @@ cart.forEach((cartitem)=>{
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                     Delete
                   </span>
                 </div>
@@ -85,7 +86,18 @@ cart.forEach((cartitem)=>{
               </div>
             </div>
           </div>
-    `
-})
-console.log(cartsummary)
-document.querySelector('.js-order-summary').innerHTML=cartsummary
+    `;
+});
+
+console.log(cartsummary);
+document.querySelector('.js-order-summary').innerHTML = cartsummary;
+
+document.querySelectorAll('.js-delete-link')
+    .forEach((link) => {
+        link.addEventListener('click', () => {
+            const productID = link.dataset.productId; // Corrected from productID to productId
+            removeFromCart(productID)
+           const container= document.querySelector(`.js-item-container-${productID}`)
+            container.remove()
+        });
+    });
