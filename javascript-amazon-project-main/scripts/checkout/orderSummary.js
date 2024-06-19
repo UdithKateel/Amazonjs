@@ -2,7 +2,7 @@ import { cart, removeFromCart, updateDeliveryOptions } from "../../data/cart.js"
 import { products } from "../../data/products.js";
 
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import { deliveryoption } from "../../data/deliveryoptions.js";
+import { deliveryoption,GetDeliveryOption } from "../../data/deliveryoptions.js";
 export function renderorderSummary(){
 let cartsummary = "";
 cart.forEach((cartitem) => {
@@ -10,7 +10,7 @@ cart.forEach((cartitem) => {
   let matchingProduct = products.find((product) => product.id === productId);
 
   const deliveryoptionId = cartitem.deliveryoptionId;
-  let selecteddeliveryoption = deliveryoption.find((option) => option.id === deliveryoptionId);
+  let selecteddeliveryoption = GetDeliveryOption(deliveryoptionId)
 
   const today = dayjs();
   const deliverydate = today.add(selecteddeliveryoption.deliveryDays, "days");
@@ -33,7 +33,7 @@ cart.forEach((cartitem) => {
                 </div>
                 <div class="product-quantity">
                   <span>
-                    Quantity: <span class="quantity-label">${cartitem.quantity}</span>
+                    Quantity: <span class="quantity-label">${cartitem.Quantity}</span>
                   </span>
                   <span class="update-quantity-link link-primary">
                     Update
