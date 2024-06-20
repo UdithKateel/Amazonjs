@@ -9,20 +9,21 @@ function savetostorage() {
 export function addtocart(productId) {
   let matchingproduct;
 
+  let itemquantityselect = parseInt(document.getElementById(`js-choice-of-quantity-${productId}`).value);
   cart.forEach((item) => {
     if (productId === item.productId) {
       matchingproduct = item;
     }
   });
   if (matchingproduct) {
-    matchingproduct.Quantity += 1;
+    matchingproduct.Quantity += itemquantityselect;
   } else {
     cart.push({
       productId: productId,
-      Quantity: 1,
+      Quantity: itemquantityselect,
       deliveryoptionId: "1",
     });
-  }
+  } 
   savetostorage();
 }
 
