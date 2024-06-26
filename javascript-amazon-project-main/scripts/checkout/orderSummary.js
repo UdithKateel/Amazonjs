@@ -36,7 +36,7 @@ export function renderorderSummary() {
                   ${matchingProduct.name}
                 </div>
                 <div class="product-price">
-                  $${(matchingProduct.priceCents / 100).toFixed(2)}
+                  ₹${(matchingProduct.priceCents ).toFixed(2)}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -76,7 +76,7 @@ export function renderorderSummary() {
       const priceString =
         item.priceCents === 0
           ? "FREE"
-          : `$${(item.priceCents / 100).toFixed(2)} - `;
+          : `$${((item.priceCents / 100)).toFixed(2)} - `;
       const ischecked = item.id === cartitem.deliveryoptionId;
 
       deliverysummary += `<div class="delivery-option js-delivery-option"

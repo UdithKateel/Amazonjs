@@ -15,41 +15,41 @@ export function renderPaymentSummary() {
     shippingPriceCents += deliverryyy.priceCents;
     ProductPriceCents += Product.priceCents * cartItem.Quantity;
   });
-  const beforetaxx = shippingPriceCents + ProductPriceCents;
-  const taxx = beforetaxx / 10;
+  const beforetaxx = (shippingPriceCents/100) + ProductPriceCents;
+  const taxx = beforetaxx / 100;
   const totallCost = beforetaxx + taxx;
   const paymentHTML = `
                      <div class="payment-summary-title">Order Summary</div>
 
           <div class="payment-summary-row">
             <div>Items (3):</div>
-            <div class="payment-summary-money">$${(
-              ProductPriceCents / 100
+            <div class="payment-summary-money">₹${(
+              ProductPriceCents 
             ).toFixed(2)}</div>
           </div>
 
           <div class="payment-summary-row">
             <div>Shipping &amp; handling:</div>
-            <div class="payment-summary-money">$${(
-              shippingPriceCents / 100
+            <div class="payment-summary-money">₹${(
+              shippingPriceCents /100
             ).toFixed(2)}</div>
           </div>
 
           <div class="payment-summary-row subtotal-row">
             <div>Total before tax:</div>
-            <div class="payment-summary-money">$${(beforetaxx / 100).toFixed(
+            <div class="payment-summary-money">₹${(beforetaxx).toFixed(
               2
             )}</div>
           </div>
 
           <div class="payment-summary-row">
             <div>Estimated tax (10%):</div>
-            <div class="payment-summary-money">$${(taxx / 100).toFixed(2)}</div>
+            <div class="payment-summary-money">₹${(taxx ).toFixed(2)}</div>
           </div>
 
           <div class="payment-summary-row total-row">
             <div>Order total:</div>
-            <div class="payment-summary-money">$${(totallCost / 100).toFixed(
+            <div class="payment-summary-money">₹${(totallCost ).toFixed(
               2
             )}</div>
           </div>
