@@ -48,8 +48,9 @@ updateCartDisplay();
             </div>
 
             <div class="product-actions">
-              <a href="tracking.html">
-                <button class="track-package-button button-secondary">
+              <a href="tracking.html" class="track-package-link" data-product-id=${matchingProduct.id}>
+                <button class="track-package-button button-secondary"   
+                data-product-id=${matchingProduct.id}>
                   Track package
                 </button>
               </a>
@@ -61,3 +62,17 @@ updateCartDisplay();
 
 
 document.querySelector('.orders-grid').innerHTML=MyOrders
+document.querySelector('.orders-grid').innerHTML = MyOrders;
+
+// Add event listeners to Track Package buttons
+document.querySelectorAll('.track-package-link').forEach(button => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    const productId = button.getAttribute('data-product-id');
+    const productData = cart.find(item => item.productId == productId);
+    localStorage.setItem('trackingProduct', JSON.stringify(productData));
+    window.location.href = 'tracking.html';
+
+    
+  });
+});

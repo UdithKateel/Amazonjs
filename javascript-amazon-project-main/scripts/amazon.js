@@ -1,5 +1,12 @@
 import { cart,addtocart,updatecartquantity } from "../data/cart.js";
 import { products } from "../data/products.js";
+function loadCartQuantity() {
+  const cartQuantityElement = document.querySelector('.js-cart-quantity');
+  if (cartQuantityElement) {
+    const cartQuantity = updatecartquantity();
+    cartQuantityElement.innerText = cartQuantity;
+  }
+}
 let productsHTML = "";
 products.forEach((product) => {
   productsHTML += ` 
@@ -86,3 +93,4 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     console.log(cart);
   });
 });
+loadCartQuantity()
